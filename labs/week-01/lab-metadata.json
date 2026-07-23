@@ -1,10 +1,10 @@
 {
   "week": "week-01",
   "title": "Developer Environment & GitHub Repository Setup",
-  "status": "ready",
+  "status": "submitted",
   "sourceOrigin": "migrated-repository",
-  "originalRepoUrl": "https://github.com/<username>/<old-lab01-repo>",
-  "originalCommit": "abc1234",
+  "originalRepoUrl": "https://github.com/Nonthachai09/engse203-lab01-68543210012-9.git",
+  "originalCommit": "913ab39",
   "pullRequestUrl": "",
   "submissionTag": "lab-01-submission-v1",
   "testStatus": "pass",

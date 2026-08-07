@@ -6,7 +6,7 @@
   "originalRepoUrl": "",
   "originalCommit": "",
   "pullRequestUrl": "",
-  "submissionTag": "lab-03-submission-v1",
+  "submissionTag": "lab-04-submission-v1",
   "testStatus": "pass",
   "notes": "React/Vite build output ต้องอยู่ใน publish/ ก่อนสร้าง Pages Hub"
 }

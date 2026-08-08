@@ -38,7 +38,7 @@
     "sourceOrigin": "migrated-repository",
     "originalRepoUrl": "",
     "originalCommit": "",
-    "pullRequestUrl": "",
+    "pullRequestUrl": "https://github.com/Nonthachai09/engse203-student-labs-68543210012-9/compare/lab/week-03?expand=1",
     "submissionTag": "lab-03-submission-v1",
     "testStatus": "pass",
     "notes": "Static site ต้องมี index.html ที่ publish root",

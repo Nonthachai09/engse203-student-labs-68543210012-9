@@ -6,7 +6,7 @@ import LoadingState from '../components/LoadingState.jsx';
 import RequestList from '../components/RequestList.jsx';
 import SummaryPanel from '../components/SummaryPanel.jsx';
 import useManualReload from '../hooks/useManualReload.js';
-import { getRequests,deleteRequest,resetRequests } from '../services/requestService.js';
+import { deleteRequest, getRequests, resetRequests } from '../services/requestService.js';
 
 function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,20 +20,24 @@ function DashboardPage() {
   const [notice, setNotice] = useState('');
 
   useEffect(() => {
+    let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
 
-    getRequests({ scenario })
+    getRequests({ scenario, onRecovery: setNotice })
       .then((data) => {
+        if (ignore) return;
         setRequests(data);
         setLoadState('success');
       })
       .catch((error) => {
+        if (ignore) return;
         setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
         setLoadState('error');
       });
-    // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
+
+    return () => { ignore = true; };
   }, [scenario, reloadKey]);
 
   const summary = useMemo(() => ({
@@ -53,8 +57,8 @@ function DashboardPage() {
   }
 
   async function handleDelete(requestId) {
-    const next = await deleteRequest(requestId);
-    setRequests(next);
+    const nextRequests = await deleteRequest(requestId);
+    setRequests(nextRequests);
     setNotice(`ลบคำร้อง ${requestId} แล้ว`);
   }
 
@@ -66,17 +70,17 @@ function DashboardPage() {
     setNotice('คืนค่าข้อมูลตัวอย่างเรียบร้อยแล้ว');
   }
 
-
-
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
         <div>
           <p className="eyebrow dark">ROUTED · READ PATH</p>
           <h1>Dashboard</h1>
-          <p>ติดตามคำร้องจาก URL และ Service Layer</p>        
+          <p>ติดตามคำร้องจาก URL และ Service Layer</p>
         </div>
-        <button className="button ghost" data-testid="reset-button" type="button" onClick={handleReset}>Reset Demo Data</button>  
+        <button className="button ghost" data-testid="reset-button" type="button" onClick={handleReset}>
+          Reset Demo Data
+        </button>
       </div>
 
       {scenario && <p className="lab-scenario" role="status">LAB test scenario: {scenario}</p>}

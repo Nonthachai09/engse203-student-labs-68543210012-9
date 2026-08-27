@@ -1,7 +1,7 @@
 {
   "week": "week-05",
   "title": "Campus Service Request Management",
-  "status": "ready",
+  "status": "submitted",
   "sourceOrigin": "migrated-repository",
   "originalRepoUrl": "https://github.com/Nonthachai09/engse203-student-labs-68543210012-9.git",
   "originalCommit": "abc12345",
@@ -12,5 +12,5 @@
   "pageUrl": "https://Nonthachai09.github.io/engse203-student-labs-68543210012-9/labs/week-05/",
   "sourceUrl": "https://github.com/Nonthachai09/engse203-student-labs-68543210012-9/tree/lab/week-05/labs/week-05/source",
   "hasPublish": true,
-  "sourceEntries": 12
+  "sourceEntries": 11
 }

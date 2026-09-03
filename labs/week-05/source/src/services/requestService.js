@@ -168,7 +168,7 @@ export async function addRequest(requestInput) {
  * ใช้ .filter() สร้าง array ใหม่ อย่าแก้ array เดิม แล้ว persist
  */
 export async function deleteRequest(requestId) {
-  const requests = await getRequests();
+  const requests = await loadNormalRequests();
   const nextRequests = requests.filter((request) => request.id !== requestId);
   writeStoredRequests(nextRequests);
   return structuredClone(nextRequests);

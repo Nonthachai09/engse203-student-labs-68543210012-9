@@ -63,6 +63,7 @@ function DashboardPage() {
 
     return matchesStatus && matchesSearch;
   });
+  
   function handleRetry() {
     if (scenario) setSearchParams({});
     else reload();

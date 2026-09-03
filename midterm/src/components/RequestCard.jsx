@@ -10,7 +10,10 @@ function RequestCard({ request, onDeleteRequest, onAcknowledge }) {
         <p>{request.location}</p>
         <p>{request.details}</p>
         {/* TODO B4: แทน <span> สถานะดิบด้านล่างด้วย <StatusBadge status={request.status} /> ที่คุณสร้าง */}
-        <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
+        <span className={`badge ${request.status}`}>
+          {request.status}
+        </span>
+        <p><StatusBadge status={request.status} /> · {request.priority}</p>
       </div>
       <div className="request-card-actions">
         {/* TODO B3: เพิ่มปุ่ม "รับเรื่อง" ที่แสดงเฉพาะการ์ดสถานะ pending (เรียก onAcknowledge) */}

@@ -63,7 +63,7 @@ function DashboardPage() {
 
     return matchesStatus && matchesSearch;
   });
-  
+
   function handleRetry() {
     if (scenario) setSearchParams({});
     else reload();
@@ -125,6 +125,13 @@ function DashboardPage() {
               value={searchText}
               onChange={(event) => setSearchText(event.target.value)}
             />
+            
+            {filteredRequests.length === 0 && (
+              <p className="notice" role="status">
+                ไม่พบคำร้องที่ตรงกับการค้นหา
+              </p>
+            )}
+
             {/* TODO B3: ส่ง onAcknowledge={handleAcknowledge} ให้ RequestList เพื่อให้การ์ด pending มีปุ่ม "รับเรื่อง" */}
             <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
           </section>

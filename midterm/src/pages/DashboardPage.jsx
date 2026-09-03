@@ -92,6 +92,16 @@ function DashboardPage() {
     }
   }
 
+  async function handleAcknowledge(requestId) {
+    try {
+      const nextRequests = await updateRequestStatus(requestId, 'in-progress');
+      setRequests(nextRequests);
+      setNotice(`รับเรื่อง ${requestId} แล้ว`);
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : 'รับเรื่องไม่สำเร็จ');
+    }
+  }
+
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
@@ -133,7 +143,7 @@ function DashboardPage() {
             )}
 
             {/* TODO B3: ส่ง onAcknowledge={handleAcknowledge} ให้ RequestList เพื่อให้การ์ด pending มีปุ่ม "รับเรื่อง" */}
-            <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
+            <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} onAcknowledge={handleAcknowledge} />
           </section>
         </>
       )}

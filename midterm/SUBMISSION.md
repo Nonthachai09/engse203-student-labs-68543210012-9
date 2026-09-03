@@ -14,7 +14,19 @@
 รันคำสั่ง `npm run build` แล้ววางบรรทัดสุดท้ายที่ขึ้นว่า `✓ built in ...` ลงตรงนี้
 
 ```
-(วางผลตรงนี้)
+SE68543210012@admins-iMac midterm % npm run build
+
+> engse203-week05-campus-service-request@0.3.0 build
+> vite build
+
+vite v8.1.5 building client environment for production...
+✓ 42 modules transformed.
+computing gzip size...
+dist/index.html                   0.49 kB │ gzip:  0.31 kB
+dist/assets/index-CEFsd5Pt.css    5.52 kB │ gzip:  1.90 kB
+dist/assets/index-7CwjL1iI.js   254.24 kB │ gzip: 80.05 kB
+
+✓ built in 1.11s
 ```
 
 ---

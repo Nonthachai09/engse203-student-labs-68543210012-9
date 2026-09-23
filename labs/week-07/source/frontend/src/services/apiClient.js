@@ -10,6 +10,7 @@
  * ⚠ ตัวแปรของ Vite ต้องขึ้นต้นด้วย VITE_ เท่านั้น
  *   ถ้าตั้งชื่อว่า API_BASE_URL เฉย ๆ จะได้ undefined
  */
+import.meta.env.VITE_API_BASE_URL;
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
 
@@ -43,6 +44,7 @@ async function parseError(response) {
  *
  * อย่าลืมส่ง header 'Content-Type': 'application/json'
  */
+
 export async function apiFetch(path, options = {}) {
   let response;
   try {

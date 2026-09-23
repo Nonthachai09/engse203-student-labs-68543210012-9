@@ -34,8 +34,30 @@ const validRequest = {
  */
 describe('GET /api/requests', () => {
   test('คืนรายการทั้งหมด พร้อม status 200', async () => {
-    // const res = await request(app).get('/api/requests');
-    // assert.equal(res.status, 200);
-    assert.ok(true, 'ยังไม่ได้เขียน test — ดู TODO W07-TEST');
+    const res = await request(app).get('/api/requests');
+    assert.equal(res.status, 200);
+    assert.ok(Array.isArray(res.body));
+  });
+  test('GET /api/requests/:id พบ → 200', async () => {
+    const res = await request(app).get('/api/requests/REQ-001');
+    assert.equal(res.status, 200);  
+    assert.equal(res.body.id, 'REQ-001');
+  });
+  test('GET /api/requests/:id ไม่พบ → 404', async () => {
+    const res = await request(app).get('/api/requests/9999');
+    assert.equal(res.status, 404);
+  });
+  test('POST ข้อมูลถูกต้อง → 201 และ status เป็น pending', async () => {
+    const res = await request(app).post('/api/requests').send(validRequest);
+    assert.equal(res.status, 201);
+    assert.equal(res.body.status, 'pending');
+  });
+  test('POST ข้อมูลไม่ครบ → 400', async () => {
+    const res = await request(app).post('/api/requests').send({ requesterName: 'ทดสอบ' });
+    assert.equal(res.status, 400);
+  });
+  test('CORS header ตอบ origin ที่อนุญาต', async () => {
+    const res = await request(app).get('/api/requests').set('Origin', 'http://localhost:5173');
+    assert.equal(res.headers['access-control-allow-origin'], 'http://localhost:5173');
   });
 });

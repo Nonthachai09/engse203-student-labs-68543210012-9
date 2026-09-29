@@ -174,7 +174,30 @@ Access-Control-Allow-Origin: http://localhost:5173
 
 ---
 
-## การรันทั้งระบบ
+## Data Model
+
+## ตาราง users
+
+| คอลัมน์ | ชนิดข้อมูล | ข้อกำหนด (Constraint) | เหตุผลที่เลือก |
+|---|---|---|---|
+| `id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | ใช้ระบุผู้ใช้แต่ละคนด้วยรหัสที่ไม่ซ้ำกัน และให้ระบบสร้างเลข ID อัตโนมัติ |
+| `name` | TEXT | NOT NULL | เก็บชื่อผู้ใช้งาน และต้องมีข้อมูล |
+| `department` | TEXT | NOT NULL | เก็บหน่วยงาน/แผนกของผู้ใช้ เพื่อระบุข้อมูลผู้ร้องขอ |
+| `email` | TEXT | NOT NULL, UNIQUE | ใช้เก็บอีเมลสำหรับระบุผู้ใช้ และป้องกันอีเมลซ้ำกัน |
+
+## ตาราง requests
+
+| คอลัมน์ | ชนิดข้อมูล | ข้อกำหนด (Constraint) | เหตุผลที่เลือก |
+|---|---|---|---|
+| `id` | TEXT | PRIMARY KEY | ใช้ระบุคำร้องแต่ละรายการด้วยรหัสที่ไม่ซ้ำกัน |
+| `requester_id` | INTEGER | NOT NULL, FOREIGN KEY → `users.id` | ใช้อ้างอิงผู้ร้องขอจากตาราง `users` เพื่อลดการเก็บข้อมูลผู้ใช้ซ้ำในแต่ละคำร้อง |
+| `request_type` | TEXT | NOT NULL, CHECK | ใช้เก็บประเภทคำร้อง และ CHECK ช่วยจำกัดให้เป็นประเภทที่ระบบกำหนด |
+| `location` | TEXT | NOT NULL | เก็บสถานที่ที่เกี่ยวข้องกับคำร้อง และต้องมีข้อมูล |
+| `details` | TEXT | NOT NULL | เก็บรายละเอียดของปัญหาหรือคำร้อง และต้องมีข้อมูล |
+| `priority` | TEXT | NOT NULL, DEFAULT `normal`, CHECK | ใช้ระบุระดับความเร่งด่วน โดยกำหนดค่าเริ่มต้นเป็น `normal` และจำกัดค่าให้ถูกต้อง |
+| `status` | TEXT | NOT NULL, DEFAULT `pending`, CHECK | ใช้ติดตามสถานะของคำร้อง โดยเริ่มต้นเป็น `pending` และจำกัดสถานะที่ระบบรองรับ |
+| `created_at` | TEXT | NOT NULL, DEFAULT `datetime('now','localtime')` | ใช้บันทึกวันและเวลาที่สร้างคำร้องโดยอัตโนมัติ |
+
 
 ต้องเปิด **2 terminal** พร้อมกัน
 

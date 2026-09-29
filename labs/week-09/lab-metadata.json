@@ -1,0 +1,12 @@
+{
+  "week": "week09",
+  "title": "SQL-Fundamentals",
+  "status": "submitted",
+  "sourceOrigin": "migrated-repository",
+  "originalRepoUrl": "git@github.com:Nonthachai09/engse203-student-labs-68543210012-9.git",
+  "originalCommit": "ca12e49",
+  "pullRequestUrl": "https://github.com/Nonthachai09/engse203-student-labs-68543210012-9/pull/14",
+  "submissionTag": "lab-09-submission-v1",
+  "testStatus": "pass",
+  "notes": "ทดสอบ SQL Fundamentals, JOIN, Constraint, Subquery, Index และ EXPLAIN แล้ว"
+}

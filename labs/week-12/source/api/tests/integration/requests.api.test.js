@@ -100,6 +100,14 @@ describe('DELETE /api/requests/:id', () => {
   test('ลบรายการที่ไม่มี → 404', async () => {
     await request(app).delete('/api/requests/REQ-999').expect(404);
   });
+    // 🐞 regression test — BUG #1: ลบแล้วเพิ่มใหม่ ได้ 500 (รหัสซ้ำ) · ใส่ใน describe POST
+  test('ลบรายการกลาง แล้วเพิ่มใหม่ → 201 และรหัสไม่ซ้ำของเดิม', async () => {
+    await request(app).delete('/api/requests/REQ-002').expect(204);
+    const r = await request(app).post('/api/requests').send(valid);
+    expect(r.status).toBe(201);
+    const ids = (await request(app).get('/api/requests')).body.map((x) => x.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
 });
 
 describe('เส้นทางที่ไม่มีอยู่', () => {
@@ -116,6 +124,11 @@ describe('ข้อมูลผิดรูปแบบ', () => {
       .set('Content-Type', 'application/json').send('{"requesterName": ');
     expect(r.status).toBe(400);
     expect(r.body).toHaveProperty('error');
+  });
+  
+  test('คำร้องที่ไม่มีอยู่ → 404 (ไม่ใช่ 500)', async () => {
+    const r = await request(app).put('/api/requests/REQ-999').send({ status: 'completed' });
+    expect(r.status).toBe(404);
   });
 });
 

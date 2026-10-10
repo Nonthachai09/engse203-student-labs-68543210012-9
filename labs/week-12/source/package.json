@@ -13,6 +13,6 @@
     "check": "node --disable-warning=ExperimentalWarning check-week12.mjs"
   },
   "devDependencies": {
-    "supertest": "^7.2.2"
+    "supertest": "^7.3.1"
   }
 }
